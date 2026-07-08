@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Filtros &amp; Óleos — Localizador de peças</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="brand-mark">FO</span>
+      <div class="brand-text">
+        <strong>Filtros &amp; Óleos</strong>
+        <span>Localizador de peças por equipamento</span>
+      </div>
+    </div>
+    <div class="topbar-stats" id="topbarStats"></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="search-panel">
+    <label for="searchInput" class="search-label">Equipamento (modelo, matrícula ou nº interno)</label>
+    <div class="search-row">
+      <input id="searchInput" type="text" autocomplete="off" placeholder="Ex: Peugeot 207, 83-MM-81, Volvo L120…">
+      <button id="clearBtn" class="btn-ghost" type="button" title="Limpar pesquisa">Limpar</button>
+    </div>
+    <div id="suggestions" class="suggestions hidden"></div>
+
+    <div class="filter-row">
+      <span class="filter-label">Mostrar:</span>
+      <div class="chip-group" id="catFilter">
+        <button class="chip active" data-cat="all" type="button">Tudo</button>
+        <button class="chip" data-cat="filtro" type="button">Filtros</button>
+        <button class="chip" data-cat="oleo" type="button">Óleos e lubrificantes</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="emptyState" class="empty-state">
+    <p class="empty-title">Procure um equipamento</p>
+    <p class="empty-body">Escreva o modelo, a matrícula ou o número interno da máquina/viatura para ver todos os filtros e óleos que utiliza, com a referência interna e a localização no armazém.</p>
+  </section>
+
+  <section id="resultsWrap" class="results-wrap hidden">
+    <div class="results-header">
+      <h2 id="equipTitle"></h2>
+      <div id="equipMeta" class="equip-meta"></div>
+    </div>
+    <div class="table-scroll">
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th class="col-cat"></th>
+            <th>Referência</th>
+            <th>Designação</th>
+            <th>Qtd</th>
+            <th>Corredor</th>
+            <th>Prateleira</th>
+            <th>Divisão</th>
+            <th>Caixa / nível</th>
+            <th class="col-edit"></th>
+          </tr>
+        </thead>
+        <tbody id="resultsBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="noResults" class="empty-state hidden">
+    <p class="empty-title">Sem resultados</p>
+    <p class="empty-body">Não encontrámos nenhum equipamento com esse nome. Tente uma matrícula, um número de série ou parte do modelo.</p>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <span>Dados extraídos da lista de equipamento por referência de manutenção.</span>
+  <div class="footer-actions">
+    <button id="exportBtn" class="btn-ghost" type="button">Exportar localizações (JSON)</button>
+    <label class="btn-ghost import-label">
+      Importar localizações
+      <input id="importInput" type="file" accept="application/json" hidden>
+    </label>
+  </div>
+</footer>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
