@@ -288,6 +288,7 @@
         '<span class="cat-tag ' + cat + '">' + catLabel + '</span><br>' +
         escapeHtml(part.design1 || '') +
       '</td>' +
+      '<td class="belongs-cell">' + (cat === 'oleo' ? escapeHtml(formatBelongs(r.design2)) : '<span class="loc-empty">—</span>') + '</td>' +
       '<td>' + escapeHtml(String(r.qtt !== undefined && r.qtt !== '' ? r.qtt : '')) + '</td>' +
       locCell(loc.corredor) +
       locCell(loc.prateleira) +
@@ -402,6 +403,13 @@
     };
     reader.readAsText(file);
     e.target.value = '';
+  }
+
+  function formatBelongs(s) {
+    var t = (s || '').trim();
+    if (!t) return '';
+    var lower = t.toLowerCase();
+    return lower.charAt(0).toUpperCase() + lower.slice(1);
   }
 
   function escapeHtml(s) {
